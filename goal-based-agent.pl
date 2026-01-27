@@ -1,5 +1,21 @@
+% ===== APPLICANT DATABASE =====
+% Format: applicant(Name, Income, CreditScore, LoanAmount, Employment)
+
+applicant(john, 50000, 720, 20000, employed).
+applicant(sarah, 30000, 650, 15000, employed).
+applicant(mike, 80000, 580, 40000, employed).
+applicant(lisa, 45000, 700, 25000, unemployed).
+applicant(tom, 60000, 800, 10000, employed).
+
+
+% ===== GOAL-BASED AGENT =====
+
 % Define the goal state
 goal_state(low_risk_portfolio).
+
+% Calculate debt-to-income ratio
+debt_to_income_ratio(Income, LoanAmount, DTI) :-
+    DTI is (LoanAmount / Income) * 100.
 
 % Actions the agent can take
 possible_action(approve_immediately).
