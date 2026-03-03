@@ -4,6 +4,7 @@
 :- dynamic credit_score/1.
 :- dynamic employment_status/1.
 
+
 update_income(Value) :-
     retractall(income(_)),
     assertz(income(Value)).
@@ -12,26 +13,30 @@ update_credit_score(Value) :-
     retractall(credit_score(_)),
     assertz(credit_score(Value)).
 
-update_employment_status :-
+update_employment_status(Value) :-
     retractall(employment_status(_)),
     assertz(employment_status(Value)).
 
 
+
 approve_loan :-
-    income(I)
-    employment_status(employed)
-    credit_score(C)
-    I >= 3000
-    C >= 670
+    income(I),
+    employment_status(employed),
+    credit_score(C),
+    I >= 3000,
+    C >= 670.
+
 
 
 reject_loan :-
-    credit_score(C)
-    C < 670
+    credit_score(C),
+    C < 670.
     
 
+
 request_more_info :-
-    \+ credit_score(_)
+    \+ credit_score(_).
+
 
 
 decide(Action) :-
@@ -41,7 +46,7 @@ decide(Action) :-
 
 decide(Action) :-
     reject_loan,
-    Action= reject_loan,
+    Action = reject_loan,
     !.
 
 decide(Action) :-
@@ -49,6 +54,9 @@ decide(Action) :-
     Action = request_more_info.
 
 
-?- update_income(4000)
-?- update_employment_status(employed)
-?- decide(Action).
+
+% Example usage:
+% ?- update_income(4000).
+% ?- update_employment_status(employed).
+% ?- update_credit_score(700).
+% ?- decide(Action).
